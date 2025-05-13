@@ -5,6 +5,7 @@ from .gestacion import Gestacion
 from .pacientes import Pacientes
 from .recomendaciones import Recomendaciones
 from .tratamiento import Tratamiento
+from .users import User
 
 __all__ = [
     'Consultas',
@@ -13,5 +14,6 @@ __all__ = [
     'Gestacion',
     'Pacientes',
     'Recomendaciones',
-    'Tratamiento'
+    'Tratamiento',
+    'User',
 ]

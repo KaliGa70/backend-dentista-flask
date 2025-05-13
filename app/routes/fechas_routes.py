@@ -1,8 +1,11 @@
 from flask import Blueprint, jsonify, request
 from ..services.fechas_services import get_all_fechas, create_fecha
-fechas_bp = Blueprint('fechas', __name__)
+from flask_jwt_extended import jwt_required
 
-@fechas_bp.route('/fecha', methods=['GET'])
+fechas_bp = Blueprint('fechas', __name__, url_prefix='/fecha')
+
+@fechas_bp.route('/obtener', methods=['GET'])
+@jwt_required(locations=['cookies'])
 def get_fechas():
     fechas = get_all_fechas()
     return jsonify([
@@ -13,7 +16,8 @@ def get_fechas():
         } for f in fechas
     ])
 
-@fechas_bp.route('/fecha', methods=['POST'])
+@fechas_bp.route('/create', methods=['POST'])
+@jwt_required(locations=['cookies'])
 def add_fecha():
     data = request.get_json()
     new_fecha = create_fecha(data)

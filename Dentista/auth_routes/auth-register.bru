@@ -1,0 +1,19 @@
+meta {
+  name: /auth/register
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://192.168.1.132:5000/auth/register
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "username": "andres12",
+    "email": "andres12.perez@example.com",
+    "password": "MiContraseñaSegura123"
+  }
+}

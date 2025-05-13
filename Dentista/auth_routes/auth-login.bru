@@ -1,0 +1,18 @@
+meta {
+  name: /auth/login
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://192.168.1.132:5000/auth/login
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "username": "andres12",
+    "password": "MiContraseñaSegura123"
+  }
+}

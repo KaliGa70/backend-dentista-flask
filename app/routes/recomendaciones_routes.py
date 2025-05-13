@@ -1,8 +1,11 @@
 from flask import Blueprint, jsonify, request
 from ..services.recomendaciones_services import get_all_recomendaciones, create_recomendacion
-recomendaciones_bp = Blueprint('recomendaciones', __name__)
+from flask_jwt_extended import jwt_required
 
-@recomendaciones_bp.route('/recomendacion', methods=['GET'])
+recomendaciones_bp = Blueprint('recomendaciones', __name__, url_prefix='/recomendacion')
+
+@recomendaciones_bp.route('/obtener', methods=['GET'])
+@jwt_required(locations=['cookies'])
 def get_recomendaciones():
     recomendaciones = get_all_recomendaciones()
     return jsonify([
@@ -13,7 +16,8 @@ def get_recomendaciones():
         } for r in recomendaciones
     ])
 
-@recomendaciones_bp.route('/recomendacion', methods=['POST'])
+@recomendaciones_bp.route('/create', methods=['POST'])
+@jwt_required(locations=['cookies'])
 def add_recomendacion():
     data = request.get_json()
     new_recomendacion = create_recomendacion(data)

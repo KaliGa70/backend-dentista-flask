@@ -18,6 +18,7 @@ def create_app():
     from app.routes import consultas_routes
     from app.routes import fechas_routes
     from app.routes import recomendaciones_routes
+    from app.routes import auth_routes
     app.register_blueprint(pacientes_routes.pacientes_bp)
     app.register_blueprint(tratamiento_routes.tratamientos_bp)
     app.register_blueprint(gestacion_routes.gestaciones_bp)
@@ -25,5 +26,6 @@ def create_app():
     app.register_blueprint(consultas_routes.consultas_bp)
     app.register_blueprint(fechas_routes.fechas_bp)
     app.register_blueprint(recomendaciones_routes.recomendaciones_bp)
+    app.register_blueprint(auth_routes.auth_bp)
 
     return app

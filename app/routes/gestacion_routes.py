@@ -1,8 +1,11 @@
 from flask import Blueprint, jsonify, request
 from ..services.gestacion_services import get_all_gestaciones, create_gestacion
-gestaciones_bp = Blueprint('gestacion', __name__)
+from flask_jwt_extended import jwt_required
 
-@gestaciones_bp.route('/gestacion', methods=['GET'])
+gestaciones_bp = Blueprint('gestacion', __name__, url_prefix='/gestacion')
+
+@gestaciones_bp.route('/obtener', methods=['GET'])
+@jwt_required(locations=['cookies'])
 def get_gestaciones():
     gestaciones = get_all_gestaciones()
     return jsonify([
@@ -14,7 +17,8 @@ def get_gestaciones():
         } for g in gestaciones
     ])
 
-@gestaciones_bp.route('/gestacion', methods=['POST'])
+@gestaciones_bp.route('/create', methods=['POST'])
+@jwt_required(locations=['cookies'])
 def add_gestacion():
     data = request.get_json()
     new_gestacion = create_gestacion(data)

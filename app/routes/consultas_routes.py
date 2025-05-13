@@ -1,8 +1,11 @@
 from flask import Blueprint, jsonify, request
 from ..services.consultas_services import get_all_consultas, create_consulta
-consultas_bp = Blueprint('consultas', __name__)
+from flask_jwt_extended import jwt_required
 
-@consultas_bp.route('/consulta', methods=['GET'])
+consultas_bp = Blueprint('consultas', __name__, url_prefix='/consulta')
+
+@consultas_bp.route('/obtener', methods=['GET'])
+@jwt_required(locations=['cookies'])
 def get_consultas():
     consultas = get_all_consultas()
     return jsonify([
@@ -13,7 +16,8 @@ def get_consultas():
         } for d in consultas
     ])
 
-@consultas_bp.route('/consulta', methods=['POST'])
+@consultas_bp.route('/create', methods=['POST'])
+@jwt_required(locations=['cookies'])
 def add_consulta():
     data = request.get_json()
     new_consulta = create_consulta(data)

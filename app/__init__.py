@@ -1,22 +1,27 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager
 from app.config import Config
 
 # Inicializar SQLAlchemy
 db = SQLAlchemy()
+jwt = JWTManager()
 
 def create_app():
     """
     Factory function para crear y configurar la aplicación Flask.
     """
     # Crear la instancia de Flask
-    app = Flask(__name__)
+    app = Flask(__name__, instance_relative_config=True)
 
     # Configurar la aplicación desde la clase Config
     app.config.from_object(Config)
+    app.config.from_pyfile('config.py', silent=True)
+
 
     # Inicializar la base de datos
     db.init_app(app)
+    JWTManager(app)
 
     # Registrar blueprints (rutas)
     register_blueprints(app)
@@ -34,6 +39,7 @@ def register_blueprints(app):
     from .routes.consultas_routes import consultas_bp
     from .routes.fechas_routes import fechas_bp
     from .routes.recomendaciones_routes import recomendaciones_bp
+    from .routes.auth_routes import auth_bp
 
 
     app.register_blueprint(pacientes_bp)
@@ -43,4 +49,5 @@ def register_blueprints(app):
     app.register_blueprint(consultas_bp)
     app.register_blueprint(fechas_bp)
     app.register_blueprint(recomendaciones_bp)
+    app.register_blueprint(auth_bp)
 
