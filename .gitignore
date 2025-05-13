@@ -1,0 +1,78 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+downloads/
+eggs/
+.eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Flask instance folder (configuraciones sensibles)
+instance/
+
+# Environments
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# Migrations
+migrations/
+
+# SQLite database files
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Pytest cache
+.pytest_cache/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Lock files
+poetry.lock
+Pipfile.lock
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# SSH keys
+*.pem
+
+# Temporary files
+tmp/
+*.tmp
+
+# Ignore compiled assets (if any)
+static/build/
+
+# Docker
+docker-compose.override.yml
+
+# Others
+*.log
